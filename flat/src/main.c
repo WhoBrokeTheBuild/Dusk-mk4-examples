@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
     flat_data_index =
         dusk_shader_add_data(&flat_shader, "FlatData", (void *)&flat_data, sizeof(flat_data_t));
 
-    cube = dusk_load_model_from_file("assets/cube.dmfz", &flat_shader);
+    cube = dusk_load_model_from_file("../assets/cube.dmfz", &flat_shader);
 
     dusk_run();
     dusk_term();

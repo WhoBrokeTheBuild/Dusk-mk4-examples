@@ -20,6 +20,7 @@ dusk_camera_t cameras[CAMERA_COUNT];
 
 void update(dusk_frame_info_t * finfo, SDL_Event * ev)
 {
+    GLint polygon_mode;
     dusk_camera_t * camera = dusk_get_current_camera();
 
     // vec3f_t rot = dusk_model_get_rot(model);
@@ -34,7 +35,7 @@ void update(dusk_frame_info_t * finfo, SDL_Event * ev)
 
     if (NULL != ev)
     {
-        float speed = 0.5f;
+        float speed = 10.0f;
 
         switch (ev->type)
         {
@@ -88,6 +89,19 @@ void update(dusk_frame_info_t * finfo, SDL_Event * ev)
                 dusk_camera_move(camera, (vec3f_t){{ 0.0f, -speed, 0.0f }});
 
                 break;
+            case SDLK_1:
+
+                glGetIntegerv(GL_POLYGON_MODE, &polygon_mode);
+                if (polygon_mode == GL_LINE)
+                {
+                    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+                }
+                else
+                {
+                    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+                }
+
+                break;
             }
 
             break;
@@ -120,7 +134,7 @@ void render()
 int main(int argc, char ** argv)
 {
     dusk_settings_t settings = DUSK_DEFAULT_SETTINGS;
-    settings.window_size     = (vec2u_t){{1024, 768}};
+    settings.window_size     = (vec2u_t){{1920, 1060}};
     settings.window_title    = "Cameras";
 
     dusk_callbacks_t callbacks = {
@@ -141,7 +155,7 @@ int main(int argc, char ** argv)
         dusk_add_camera(camera);
 
         dusk_camera_set_aspect(camera, settings.window_size.x, settings.window_size.y);
-        dusk_camera_set_clip(camera, 0.1f, 1000.0f);
+        dusk_camera_set_clip(camera, 0.1f, 10000.0f);
         dusk_camera_set_fov(camera, GLMM_RAD(45.0f));
         dusk_camera_set_up(camera, (vec3f_t){{0.0f, 1.0f, 0.0f}});
 
@@ -177,7 +191,7 @@ int main(int argc, char ** argv)
     light_data_index =
         dusk_shader_add_data(&shader, "LightData", &light_data, sizeof(light_data_t));
 
-    model = dusk_load_model_from_file("assets/sponza/sponza.dmfz", &shader);
+    model = dusk_load_model_from_file("../assets/sponza/sponza.dmfz", &shader);
 
     dusk_run();
     dusk_term();

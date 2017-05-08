@@ -58,6 +58,10 @@ void main()
     {
         ambient = mesh_data.ambient.rgb;
     }
+    ambient = vec3(0);
+
+    float diff = max(0.0, dot(normal.xyz, light_dir));
+    diffuse    = diff * mesh_data.diffuse.rgb;
 
     float diff = max(0.0, dot(normal.xyz, light_dir));
     diffuse    = diff * mesh_data.diffuse.rgb;

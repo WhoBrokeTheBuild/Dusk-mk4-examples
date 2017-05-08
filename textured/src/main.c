@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
     textured_data_index = dusk_shader_add_data(&textured_shader, "LightData",
                                                (void *)&textured_data, sizeof(textured_data_t));
 
-    globe = dusk_load_model_from_file("assets/globe.dmfz", &textured_shader);
+    globe = dusk_load_model_from_file("../assets/globe.dmfz", &textured_shader);
 
     dusk_run();
     dusk_term();

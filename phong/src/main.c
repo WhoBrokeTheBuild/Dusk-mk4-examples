@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
     phong_data_index =
         dusk_shader_add_data(&phong_shader, "PhongData", (void *)&phong_data, sizeof(phong_data_t));
 
-    monkey = dusk_load_model_from_file("assets/monkey.dmfz", &phong_shader);
+    monkey = dusk_load_model_from_file("../assets/monkey.dmfz", &phong_shader);
 
     dusk_run();
     dusk_term();
