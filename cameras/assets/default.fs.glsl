@@ -63,9 +63,6 @@ void main()
     float diff = max(0.0, dot(normal.xyz, light_dir));
     diffuse    = diff * mesh_data.diffuse.rgb;
 
-    float diff = max(0.0, dot(normal.xyz, light_dir));
-    diffuse    = diff * mesh_data.diffuse.rgb;
-
     if (mesh_data.has_diffuse_map)
     {
         diffuse *= texture(diffuse_map, p_texcoord).rgb;

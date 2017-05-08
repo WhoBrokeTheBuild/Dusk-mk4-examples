@@ -35,7 +35,7 @@ void update(dusk_frame_info_t * finfo, SDL_Event * ev)
 
     if (NULL != ev)
     {
-        float speed = 10.0f;
+        float speed = 1.0f;
 
         switch (ev->type)
         {
