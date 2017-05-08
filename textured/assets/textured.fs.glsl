@@ -44,7 +44,7 @@ void main()
     vec3 ambient, diffuse, specular;
     vec4 normal;
 
-    normal = p_normal;
+    normal = normalize(p_normal);
     if (mesh_data.has_bump_map)
     {
         normal = model_data.model * (texture(bump_map, p_texcoord).rgba * 2.0 - 1.0);
@@ -56,17 +56,15 @@ void main()
     }
     else
     {
-        ambient = mesh_data.ambient.rgb;
+        //ambient = mesh_data.ambient.rgb;
     }
+
+    float diff = max(0.0, dot(normal.xyz, light_dir));
+    diffuse    = diff * mesh_data.diffuse.rgb;
 
     if (mesh_data.has_diffuse_map)
     {
-        diffuse = texture(diffuse_map, p_texcoord).rgb;
-    }
-    else
-    {
-        float diff = max(0.0, dot(normal.xyz, light_dir));
-        diffuse    = diff * mesh_data.diffuse.rgb;
+        diffuse *= texture(diffuse_map, p_texcoord).rgb;
     }
 
     vec3  halfway_dir = normalize(light_dir + view_dir);

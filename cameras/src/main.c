@@ -34,7 +34,7 @@ void update(dusk_frame_info_t * finfo, SDL_Event * ev)
 
     if (NULL != ev)
     {
-        float speed = 0.5f;
+        float speed = 5.0f;
 
         switch (ev->type)
         {
@@ -141,7 +141,7 @@ int main(int argc, char ** argv)
         dusk_add_camera(camera);
 
         dusk_camera_set_aspect(camera, settings.window_size.x, settings.window_size.y);
-        dusk_camera_set_clip(camera, 0.001f, 10000.0f);
+        dusk_camera_set_clip(camera, 0.1f, 1000.0f);
         dusk_camera_set_fov(camera, GLMM_RAD(45.0f));
         dusk_camera_set_up(camera, (vec3f_t){{0.0f, 1.0f, 0.0f}});
 
@@ -163,7 +163,7 @@ int main(int argc, char ** argv)
     dusk_set_current_camera(&cameras[0]);
 
     vec3f_t cam_pos = dusk_camera_get_pos(&cameras[0]);
-    vec3f_copy(&light_data.light_pos, &(vec3f_t){{3.0f, 3.0f, 3.0f}});
+    vec3f_copy(&light_data.light_pos, &(vec3f_t){{0.0f, 10.0f, 0.0f}});
     vec3f_copy(&light_data.camera_pos, &cam_pos);
 
     dusk_shader_file_t shader_files[] = {
