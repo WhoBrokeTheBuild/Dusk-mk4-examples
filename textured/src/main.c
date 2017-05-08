@@ -15,7 +15,7 @@ dusk_shader_t   textured_shader;
 
 dusk_model_t * globe;
 
-void update(dusk_frame_info_t * finfo)
+void update(dusk_frame_info_t * finfo, SDL_Event * ev)
 {
     vec3f_t rot = dusk_model_get_rot(globe);
     rot.y += GLMM_RAD(0.3f * finfo->delta);

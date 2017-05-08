@@ -21,7 +21,7 @@ dusk_shader_t floor_shader;
 dusk_model_t wave_model;
 dusk_model_t floor_model;
 
-void update(dusk_frame_info_t * finfo)
+void update(dusk_frame_info_t * finfo, SDL_Event * ev)
 {
     wave_data.time = fmod(wave_data.time + finfo->elapsed_time / 300.0f, M_PI * 2.0f);
 
@@ -99,11 +99,11 @@ int main(int argc, char ** argv)
     dusk_mesh_create_plane(&wave_mesh, NULL, &wave_shader, 100, 100, 100.0f, 100.0f);
     dusk_track_static_resource(DUSK_RSC_MESH, &wave_mesh);
 
-    dusk_mesh_t * floor_meshes = { &floor_mesh };
+    dusk_mesh_t * floor_meshes = {&floor_mesh};
     dusk_model_init(&floor_model, 1, &floor_meshes, &floor_shader);
     dusk_track_static_resource(DUSK_RSC_MODEL, &floor_model);
 
-    dusk_mesh_t * wave_meshes = { & wave_mesh };
+    dusk_mesh_t * wave_meshes = {&wave_mesh};
     dusk_model_init(&wave_model, 1, &wave_meshes, &wave_shader);
     dusk_track_static_resource(DUSK_RSC_MODEL, &wave_model);
 
